@@ -41,29 +41,11 @@
   </div>
 
   <!-- すべてのお知らせ -->
-  <dl class="p-news">
-    <dt class="p-news__label">2025/10/05</dt>
-    <dd class="p-news__content">
-      <a href="../2025/summer/works.html">2025夏写真展の作品一覧にパスワード入力を設定しました。</a>
-    </dd>
-    <dt class="p-news__label">2025/09/21</dt>
-    <dd class="p-news__content">
-      <a href="../2025/summer/result.html">2025夏写真展の結果概要を公開しました。</a>
-    </dd>
-    <dt class="p-news__label">2025/09/18</dt>
-    <dd class="p-news__content">
-      <a href="../2025/summer/works.html">2025夏写真展の作品一覧を公開しました。</a>
-    </dd>
-    <dt class="p-news__label">2025/09/15</dt>
-    <dd class="p-news__content">
-      <a href="../2025/summer/">2025夏写真展のページを公開しました。</a>
-    </dd>
-    <dt class="p-news__label">2025/09/01</dt>
-    <dd class="p-news__content">
-      <a href="notice-password.html">作品一覧ページの閲覧について</a>
-    </dd>
-    <!-- 古いお知らせを順次追加していく -->
-  </dl>
+  <ul>
+    {% for post in site.posts %}
+      <li>{{ post.date | date: "%Y/%m/%d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
 </main>
 
   <!-- フッター -->

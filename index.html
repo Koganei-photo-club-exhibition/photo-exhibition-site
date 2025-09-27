@@ -60,24 +60,11 @@
         </div>
       </h2>
       <div class="c-section__container">
-        <dl class="p-news">
-          <dt class="p-news__label">2025/10/05</dt>
-          <dd class="p-news__content">
-            <a href="2025/summer/works.html">2025夏写真展の作品一覧にパスワード入力を設定しました。</a>
-          </dd>
-          <dt class="p-news__label">2025/09/21</dt>
-          <dd class="p-news__content">
-            <a href="2025/summer/result.html">2025夏写真展の結果概要を公開しました。</a>
-          </dd>
-          <dt class="p-news__label">2025/09/18</dt>
-          <dd class="p-news__content">
-            <a href="2025/summer/works.html">2025夏写真展の作品一覧を公開しました。</a>
-          </dd>
-          <dt class="p-news__label">2025/09/15</dt>
-          <dd class="p-news__content">
-            <a href="2025/summer/">2025夏写真展のページを公開しました。</a>
-          </dd>
-        </dl>
+        <ul>
+          {% for post in site.posts limit:5 %}
+            <li>{{ post.date | date: "%Y/%m/%d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
         <p style="text-align:center; margin-top:1em;">
           <a href="news/list.html" class="button">もっと見る</a>
         </p>
