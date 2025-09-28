@@ -1,0 +1,6 @@
+# _config.yml は常にローカル優先（Organization 側を保持）
+_config.yml merge=ours
+
+# 画像は差分計算せずバイナリ扱い
+*.jpg binary
+*.png binary
