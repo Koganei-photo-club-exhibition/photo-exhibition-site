@@ -491,6 +491,7 @@ a.button:hover {
   background: #777;
 }
 
+
 /* 本文位置（上書き） */
 main {
   margin-top: 120px; /* ヘッダー＋ナビ分下げる */
@@ -520,6 +521,30 @@ main {
   text-align: center;
   margin-top: 1em;
 }
+
+
+/* ================================
+   有効期間外の無効化スタイル
+   ================================ */
+
+
+
+/* 準備中ボタン */
+.button.disabled {
+  background: #eee;        /* 薄いグレー */
+  color: #999;             /* グレー文字 */
+  cursor: not-allowed;     /* 禁止カーソル */
+  pointer-events: none;    /* クリック無効化 */
+}
+
+/* ナビゲーションバー内の準備中リンク */
+.navbar a.disabled {
+  color: #999;                /* グレー文字 */
+  cursor: not-allowed;
+  pointer-events: none;
+  background: transparent;    /* 背景はナビと統一 */
+}
+
 
 /* ================================
    お知らせセクション
