@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>2025夏写真展 結果概要</title>
-  <link rel="stylesheet" href="{{ "/css/style.css" | relative_url }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-</head>
-<body>
-<!-- 上段ヘッダー＋ナビをまとめる -->
-<div id="header-wrapper">
-  <header id="main-header">
-    <div class="header-content">
-      <a href="{{ "/" | relative_url }}"><img src="{{ "/images/club-icon.JPG" | relative_url }}" alt="写真部アイコン" class="logo">
-      <div class="site-title">
-        <h1>法政大学 小金井写真部</h1>
-        <p>写真展</p>
-      </div></a>
-    </div>
-  </header>
-
-  <nav class="navbar">
-    <ul>
-      <li><a href="{{ "/" | relative_url }}">トップ</a></li>
-      <li><a href="{{ "/2025/summer/" | relative_url }}">2025夏写真展</a></li>
-      <li><a href="{{ "/2025/gakusai/" | relative_url }}">2025学祭写真展</a></li>
-      <li><a href="{{ "/2025/winter/" | relative_url }}">2025冬写真展</a></li>
-    </ul>
-  </nav>
-</div>
-
-<!-- メインコンテンツ -->
-<main>
+---
+layout: default
+title: "お知らせ一覧"
+---
   <h2>お知らせ一覧</h2>
 
   <!-- 固定案内 -->
@@ -43,20 +14,7 @@
   <!-- すべてのお知らせ -->
   <ul>
     {% for post in site.posts %}
-      <li>{{ post.date | date: "%Y/%m/%d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+      <li>{{ post.date | date: "%Y/%m/%d" }} <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
-</main>
 
-  <!-- フッター -->
-<footer>
-  <p>Copyright &copy; 2025 法政大学 小金井写真部 All Rights Reserved.</p>
-  <p>Designed by Takakichi</p>
-  <div class="sns-links">
-    <a href="https://www.instagram.com/photo_koganei" target="_blank">Instagram</a> |
-    <a href="https://x.com/koganei_photo" target="_blank">X</a>
-  </div>
-</footer>
-<script src="{{ "/js/script.js" | relative_url }}"></script>
-</body>
-</html>
