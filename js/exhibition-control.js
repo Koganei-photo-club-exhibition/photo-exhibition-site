@@ -3,8 +3,8 @@
 // === 写真展ごとの設定 ===
 const exhibitions = {
   "summer": {
-    startDate: new Date("2025-09-10T00:00:00"),   // 公開開始
-    endDate: new Date("2025-09-28T23:59:59"),     // 投票締切
+    startDate: new Date("2025-10-08T00:47:00"),   // 公開開始
+    endDate: new Date("2025-10-08T00:52:59"),     // 投票締切
     worksPasswordURL: "works.html",               // パスワードページ
     worksPublicURL: "af69592862e159a7cf723a78c20a47ce109d13b04db75224503159b765b84967/index.html",
     navSelector: 'a[href*="2025/summer"]',
