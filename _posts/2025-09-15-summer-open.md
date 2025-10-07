@@ -1,6 +1,8 @@
 ---
 title: "2025夏写真展のページを公開しました"
 date: 2025-09-15
+exhibition: "summer"
+published: true
 ---
 
 ## 2025年度夏写真展「閃光」の情報を解禁しました

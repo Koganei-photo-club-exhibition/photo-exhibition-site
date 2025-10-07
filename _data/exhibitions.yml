@@ -1,0 +1,29 @@
+# _data/exhibitions.yml
+
+2025:
+  summer:
+    title: "2025夏写真展"
+    url: "/2025/summer/"
+    published: true
+  gakusai:
+    title: "2025学祭写真展"
+    url: "/2025/gakusai/"
+    published: false
+  winter:
+    title: "2025冬写真展"
+    url: "/2025/winter/"
+    published: false
+
+2026:
+  summer:
+    title: "2026夏写真展"
+    url: "/2026/summer/"
+    published: false
+  gakusai:
+    title: "2026学祭写真展"
+    url: "/2026/gakusai/"
+    published: false
+  winter:
+    title: "2026冬写真展"
+    url: "/2026/winter/"
+    published: false
