@@ -8,7 +8,7 @@
   gakusai:
     title: "2025学祭写真展"
     url: "/2025/gakusai/"
-    published: false
+    published: true # 仮公開
   winter:
     title: "2025冬写真展"
     url: "/2025/winter/"

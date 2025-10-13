@@ -1,103 +1,53 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>2025学祭写真展 作品一覧</title>
-    <link rel="stylesheet" href="../../css/style.css" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Password</title>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="style.css"> いらないかも〜多分いらない-->
+    <!-- <link rel="icon" href="padlock.svg" type="image/svg+xml"> -->
+    <script type="text/javascript" src="../../js/sha256.js"></script>
+    <link rel="stylesheet" href="../../css/style.css">
   </head>
-  <body>
-    <!-- 上段ヘッダー＋ナビをまとめる -->
-    <div id="header-wrapper">
-      <header id="main-header">
-        <div class="header-content">
-          <a href="../../"
-            ><img
-              src="../../images/club-icon.JPG"
-              alt="写真部アイコン"
-              class="logo"
-            />
-            <div class="site-title">
-              <h1>法政大学 小金井写真部</h1>
-              <p>写真展</p>
-            </div></a
-          >
-        </div>
-      </header>
-
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">トップ</a></li>
-          <li><a href="../summer/">2025夏写真展</a></li>
-          <li><a href="../winter/">2025冬写真展</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- メインコンテンツ -->
-    <main>
-      <h2>2025年度 学祭写真展 作品一覧</h2>
-      <p>番号を確認してから投票フォームに進んでください。</p>
-
-      <!-- ギャラリー -->
-      <div class="gallery">
-        <div class="work-card">
-          <a href="images/gakusai01.jpg" target="_blank">
-            <img src="images/gakusai01.jpg" alt="作品No.01" />
-          </a>
-          <h3>No.01</h3>
-          <p>タイトル：学祭の光景</p>
-        </div>
-
-        <div class="work-card">
-          <a href="images/gakusai02.jpg" target="_blank">
-            <img src="images/gakusai02.jpg" alt="作品No.02" />
-          </a>
-          <h3>No.02</h3>
-          <p>タイトル：仲間たち</p>
-        </div>
-
-        <div class="work-card">
-          <a href="images/gakusai03.jpg" target="_blank">
-            <img src="images/gakusai03.jpg" alt="作品No.03" />
-          </a>
-          <h3>No.03</h3>
-          <p>タイトル：秋空</p>
-        </div>
-      </div>
-
-      <!-- 投票フォームへのリンク -->
-      <div class="vote-container">
-        <a
-          href="https://forms.gle/YJQeJJkgrZZoCbBs5"
-          target="_blank"
-          class="button"
-        >
-          投票フォームはこちら
-        </a>
-      </div>
-
-      <!-- 戻るボタン -->
-      <div style="text-align: center; margin-top: 2em">
-        <a href="./" class="button">← 戻る</a>
-      </div>
-    </main>
-
-    <!-- フッター -->
-    <footer>
-      <p>Copyright &copy; 2025 法政大学 小金井写真部 All Rights Reserved.</p>
-      <p>Designed by Takakichi</p>
-      <div class="sns-links">
-        <a href="https://www.instagram.com/photo_koganei" target="_blank"
-          >Instagram</a
-        >
-        |
-        <a href="https://x.com/koganei_photo" target="_blank">X</a>
-      </div>
-    </footer>
-    <script src="../../js/script.js"></script>
+  <body class="password-page">
+    <form id="form">
+      <p id="message">Please enter your password.</p>
+      <input type="password" placeholder="password" id="password">
+    </form>
+    <script>
+      function hash(text) {
+        const sha = new jsSHA('SHA-256', 'TEXT');
+        sha.update(text);
+        return sha.getHash('HEX');
+      }
+      function auth(password) {
+        const url = hash(password);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onload = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location = url;
+          } else {
+            const message = document.getElementById('message');
+            const input = document.getElementById('password');
+            message.innerHTML = 'Wrong password! Try again.';
+            input.value = '';
+          }
+        };
+        xhr.onerror = function () {
+          const message = document.getElementById('message');
+          message.innerHTML = 'Sorry, ERROR !';
+        };
+      }
+      const form = document.getElementById('form');
+      form.addEventListener('submit', function (event) {
+        const password = document.getElementById('password').value;
+        auth(password);
+        event.preventDefault();
+      });
+    </script>
   </body>
 </html>
