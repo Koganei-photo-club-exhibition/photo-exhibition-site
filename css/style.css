@@ -159,6 +159,14 @@ a.button:hover {
   background: #0056b3;
 }
 
+/* 免責事項のスタイル */
+footer .disclaimer {
+  font-size: 0.8em;
+  color: #777; /* グレーで控えめに */
+  margin-top: 0.5em;
+  line-height: 1.4;
+}
+
 /* 　コンポーネント　 */
 
 /* ギャラリー全体 */
