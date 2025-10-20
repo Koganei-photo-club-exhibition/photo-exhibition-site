@@ -181,72 +181,93 @@ footer .disclaimer {
   margin-bottom: 2em;
 }
 
-/* 作品カード */
+/* --- ギャラリー全体 --- */
+.work-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5em;
+  margin-top: 1em;
+  padding: 0 1em;
+  align-items: stretch;
+}
+
+/* --- 各作品カード --- */
 .work-card {
   background: white;
-  padding: 1em;
-  border-radius: 8px; /* ← 少し角丸を強調 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ← 影を少し濃く大きく */
-  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
-  transition: 0.3s; /* ← アニメーション追加 */
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .work-card:hover {
-  transform: translateY(-5px); /* ← ホバーで浮き上がる */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ← 影も強調 */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* --- 画像部分 --- */
 .work-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px; /* ← 画像の角丸を少し強めてカードと統一感 */
+  width: 100%;
+  height: 380px;              /* カード高さを統一 */
+  object-fit: contain;        /* 縦横比を保って全体表示 */
+  object-position: center;    /* 中央寄せ配置 */
+  background: #f8f8f8;        /* 縦写真の余白部分を淡いグレーで */
+  border-bottom: 1px solid #eee;
 }
 
-.work-card h3 {
-  margin: 0.5em 0 0.2em;
-  color: darkblue;
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-/* 作品番号とタイトルの位置調整 */
-.work-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  display: flex;
-  flex-direction: column; /* 上に画像、下にテキスト */
-  justify-content: space-between;
-  height: 100%;
-  margin-bottom: 1.5em;
-}
-
-.work-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  flex-grow: 1;
-  object-fit: cover;
-}
-
+/* --- 情報部分 --- */
 .work-info {
-  padding: 0.5em;
-  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;        /* ← 中央寄せに変更 */
+  padding: 0.8em 1em;
+  text-align: center;         /* テキストも中央に */
 }
 
+/* --- 各情報行 --- */
 .work-number {
   font-weight: bold;
-  margin: 0.2em 0;
+  color: #555;
+  margin: 0.3em 0 0.1em;
+  font-size: 1em;
 }
 
 .work-title {
-  font-size: 1.1em;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #222;
+  margin: 0.2em 0 0.4em;
+}
+
+.work-author {
+  font-size: 0.95em;
+  color: #333;
   margin: 0.2em 0;
+}
+
+.work-camera {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0.2em 0 0.4em;
+  text-align: left;     /* ← ★ 追加：左寄せ */
+  width: 100%;          /* ← ★ 横幅を確保して自然な左寄せ */
+}
+
+/* --- ディスクリプション --- */
+.work-description {
+  font-size: 0.9em;
+  color: #444;
+  line-height: 1.5;
+  margin-top: auto;        /* 常に下に配置 */
+  min-height: 4em;         /* 高さをある程度固定して整える */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;        /* ←★ 追加：左寄せ */
+  width: 100%;             /* ←★ 横幅いっぱいに */
 }
 
 /* DM画像のスタイル */
