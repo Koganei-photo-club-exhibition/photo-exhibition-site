@@ -85,9 +85,14 @@ window.addEventListener("load", function() {
     const lineHeight = parseFloat(getComputedStyle(desc).lineHeight) || 18;
     const collapsedHeight = Math.round(lineHeight * 5);
 
-    if (fullHeight <= collapsedHeight + 5) {
-      button.style.display = "none";
-      return;
+    // --- 高さ判定を少し緩めにする ---
+    if (fullHeight <= collapsedHeight * 1.05) { // ← 判定を約5%ゆるく
+      // ただし、文字数が短すぎる場合は非表示
+      const textLength = desc.textContent.trim().length;
+      if (textLength < 60) { // 60文字未満は短文扱い
+        button.style.display = "none";
+        return;
+      }
     }
 
     // 初期状態
