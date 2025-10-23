@@ -188,7 +188,7 @@ footer .disclaimer {
   gap: 1.5em;
   margin-top: 1em;
   padding: 0 1em;
-  align-items: stretch;
+  align-items: stretch; /* 各カードを同じ高さに揃える */
 }
 
 /* --- 各作品カード --- */
@@ -211,11 +211,9 @@ footer .disclaimer {
 /* --- 画像部分 --- */
 .work-card img {
   width: 100%;
-  height: 380px;              /* カード高さを統一 */
-  object-fit: contain;        /* 縦横比を保って全体表示 */
-  object-position: center;    /* 中央寄せ配置 */
-  background: #f8f8f8;        /* 縦写真の余白部分を淡いグレーで */
-  border-bottom: 1px solid #eee;
+  height: 300px;           /* 高さ固定（縦写真も収まる） */
+  object-fit: contain;     /* トリミングせずに中央寄せ */
+  background-color: #fafafa; /* 背景色で余白を補う */
 }
 
 /* --- 情報部分 --- */
@@ -223,38 +221,44 @@ footer .disclaimer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;        /* ← 中央寄せに変更 */
   padding: 0.8em 1em;
-  text-align: center;         /* テキストも中央に */
+  border-top: 1px solid #eee;
+  flex-grow: 1;
 }
 
 /* --- 各情報行 --- */
 .work-number {
   font-weight: bold;
   color: #555;
-  margin: 0.3em 0 0.1em;
-  font-size: 1em;
+  margin: 0.2em 0;
+  text-align: center;
 }
 
 .work-title {
   font-size: 1.15em;
   font-weight: bold;
   color: #222;
-  margin: 0.2em 0 0.4em;
+  margin: 0.3em 0;
+  text-align: center;
 }
 
 .work-author {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
   font-size: 0.95em;
   color: #333;
   margin: 0.2em 0;
+  text-align: center;
 }
 
 .work-camera {
   font-size: 0.9em;
   color: #666;
   margin: 0.2em 0 0.4em;
-  text-align: left;     /* ← ★ 追加：左寄せ */
-  width: 100%;          /* ← ★ 横幅を確保して自然な左寄せ */
+  text-align: left;     /* カメラ情報は左寄せ */
+  width: 100%;
 }
 
 /* --- ディスクリプション --- */
@@ -262,12 +266,115 @@ footer .disclaimer {
   font-size: 0.9em;
   color: #444;
   line-height: 1.5;
-  margin-top: auto;        /* 常に下に配置 */
-  min-height: 4em;         /* 高さをある程度固定して整える */
+  text-align: left;     /* 説明文は左寄せ */
+  margin-top: auto;
+  min-height: 4em;      /* 高さを揃える */
   overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;        /* ←★ 追加：左寄せ */
-  width: 100%;             /* ←★ 横幅いっぱいに */
+  white-space: pre-line; /* ←★ 改行Enter */
+}
+
+/* --- Instagramアイコン --- */
+.insta-icon {
+  width: 1.4em;           /* 小型でテキストに自然に並ぶ */
+  height: 1.4em;
+  margin-left: 0.3em;
+  vertical-align: middle;
+  fill: #000;             /* ← SVG本体の色を黒指定 */
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.insta-icon:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+  fill: #c13584;          /* hoverでインスタ色に変化 */
+}
+
+/* --- Instagramポップアップ --- */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 1.5em 2em;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content p {
+  margin-bottom: 1em;
+  font-size: 1em;
+  color: #333;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popup-buttons button {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup-buttons .confirm {
+  background-color: darkblue;
+  color: white;
+}
+
+.popup-buttons .cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* --- 折りたたみ式ディスクリプション --- */
+.work-description {
+  position: relative;
+  max-height: 6em;             /* 初期状態は約4〜5行分 */
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out, padding 0.3s ease;  /* ← なめらかに */
+  text-align: left;
+  white-space: pre-line;       /* 改行を反映 */
+}
+
+/* 展開時：高さ制限を解除して全文表示 */
+.work-description.expanded {
+  max-height: none;            /* ← ★ ここが重要！ */
+}
+
+/* 「もっと見る」ボタン（右下配置） */
+.toggle-desc {
+  display: block;
+  margin-top: 0.5em;
+  margin-left: auto;           /* 右寄せ */
+  background-color: darkblue;  /* サイト全体に合わせた色味 */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3em 0.8em;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-desc:hover {
+  background-color: navy;
 }
 
 /* DM画像のスタイル */
@@ -682,4 +789,43 @@ body.password-page #password {
     font-size: 12px;
     margin: 0;
   }
+}
+
+/* === 折りたたみ説明：確実に広がる上書き === */
+
+/* カードは高さ固定しない（広がり阻害の予防） */
+.work-card { height: auto; }
+
+/* 初期は4〜5行で折りたたみ */
+.work-info .work-description {
+  position: relative;
+  max-height: 6em;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* 展開時：インラインstyle優先に任せるが、保険で important */
+.work-info .work-description.expanded {
+  max-height: none !important;
+}
+
+/* もっと見る/閉じるボタン（右寄せ） */
+.work-info .toggle-desc {
+  display: inline-block;
+  margin-top: 0.5em;
+  margin-left: auto;
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3em 0.8em;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.work-info .toggle-desc:hover {
+  background-color: navy;
 }
