@@ -113,3 +113,101 @@ window.addEventListener("load", function() {
     });
   });
 });
+
+// ================================
+// 保存防止＋Lightbox＋ピンチズーム対応
+// ================================
+
+// 保存操作防止
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+
+// スマホ長押し防止（ただしタップ動作は許可）
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+
+// iPhone Safari対応：タップも確実にLightbox起動
+document.querySelectorAll(".photo-overlay").forEach(layer => {
+  layer.addEventListener("touchstart", e => {
+    e.stopPropagation(); // タップ波及を防ぐ
+  }, { passive: true });
+
+  layer.addEventListener("click", e => {
+    const wrapper = e.target.closest(".photo-wrapper");
+    if (!wrapper) return;
+    const url = wrapper.dataset.full;
+    if (!url) return;
+    const lightbox = document.querySelector(".lightbox");
+    const img = lightbox.querySelector("img");
+    img.src = url;
+    img.style.transform = "scale(1)";
+    lightbox.classList.add("active");
+  });
+});
+
+// Lightbox生成
+document.addEventListener("DOMContentLoaded", () => {
+  const wrappers = document.querySelectorAll(".photo-wrapper");
+  const lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  const img = document.createElement("img");
+  lightbox.appendChild(img);
+  document.body.appendChild(lightbox);
+
+  // 通常クリックでLightbox開く
+  wrappers.forEach(wrapper => {
+    wrapper.addEventListener("click", () => {
+      const url = wrapper.dataset.full;
+      if (!url) return;
+      img.src = url;
+      img.style.transform = "scale(1)";
+      img.dataset.scale = "1";
+      lightbox.classList.add("active");
+    });
+  });
+
+  // 背景クリックで閉じる
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) lightbox.classList.remove("active");
+  });
+
+  // ======================
+  // ピンチズーム対応処理
+  // ======================
+  let initialDistance = 0;
+  let currentScale = 1;
+
+  lightbox.addEventListener("touchstart", e => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const [t1, t2] = e.touches;
+      initialDistance = Math.hypot(
+        t2.clientX - t1.clientX,
+        t2.clientY - t1.clientY
+      );
+    }
+  }, { passive: false });
+
+  lightbox.addEventListener("touchmove", e => {
+    if (e.touches.length === 2 && initialDistance > 0) {
+      e.preventDefault();
+      const [t1, t2] = e.touches;
+      const newDistance = Math.hypot(
+        t2.clientX - t1.clientX,
+        t2.clientY - t1.clientY
+      );
+      const scale = Math.min(Math.max(newDistance / initialDistance, 1), 3); // 1〜3倍
+      currentScale = scale;
+      img.style.transform = `scale(${scale})`;
+    }
+  }, { passive: false });
+
+  lightbox.addEventListener("touchend", e => {
+    if (e.touches.length < 2) {
+      initialDistance = 0;
+      if (currentScale < 1.05) img.style.transform = "scale(1)";
+    }
+  });
+});
