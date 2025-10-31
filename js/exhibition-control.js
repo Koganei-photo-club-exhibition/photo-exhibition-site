@@ -22,7 +22,7 @@ const exhibitions = {
     },
     gakusai: {
       openDate:  new Date("2025-10-13T00:00:00"),
-      startDate: new Date("2025-11-01T00:00:00"),
+      startDate: new Date("2025-11-01T09:00:00"),
       endDate:   new Date("2025-11-30T23:59:59"),
       worksPasswordURL: "works.html",
       worksPublicURL: "2af262a415562b8849d6ab105bd0f438e062dd5912de91680106214e07239450/index.html",
