@@ -27,7 +27,7 @@ const exhibitions = {
       worksPasswordURL: "works.html",
       worksPublicURL: "2af262a415562b8849d6ab105bd0f438e062dd5912de91680106214e07239450/index.html",
       resultURL: "result.html",
-      voteFormURL: "https://forms.gle/exampleGakusaiForm",
+      voteFormURL: "https://forms.gle/PknQLKGvvztcN8sU6",
       navSelector: 'a[href*="2025/gakusai"]'
     },
     winter: {
