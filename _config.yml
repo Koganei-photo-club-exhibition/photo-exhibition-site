@@ -1,7 +1,7 @@
 title: "法政大学 小金井写真部 写真展サイト"
 description: "写真展のお知らせと記録"
 baseurl: "/photo-exhibition-site" # リポジトリ名と合わせる
-url: "https://fujiyoshi-takayuki.github.io"
+url: "https://Koganei-photo-club-exhibition.github.io"
 timezone: "Asia/Tokyo"
 markdown: GFM
 plugins:
