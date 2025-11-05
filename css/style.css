@@ -548,101 +548,61 @@ footer .disclaimer {
   background: navy;
 }
 
-/* 結果概要用ギャラリー+順位強調 */
-/* 結果ギャラリー */
+/* ===== 結果概要ページ (アスペクト比維持・2段構成版) ===== */
+
+/* ギャラリー全体：上位3つと下位2つを段分け配置 */
 .results-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5em; /* カード間の余白 */
-  margin-top: 1em;
-  padding: 0 1em; /* 左右に少し余白 */
-}
-
-.result-number {
-  font-weight: bold;
-  margin-right: 0.5em;
-}
-
-.result-title {
-  color: #333;
-}
-
-/* 順位ごとの色付き影 */
-.result-card.first {
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.7); /* 金 */
-}
-
-.result-card.second {
-  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.7); /* 銀 */
-}
-
-.result-card.third {
-  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.7); /* 銅 */
-}
-
-.work-number {
-  display: block; /* 改行して表示 */
-  font-weight: bold; /* 太字で強調 */
-  font-size: 0.95em; /* 少し小さめ */
-  color: #444; /* 落ち着いた色 */
-}
-
-.work-title {
-  display: block; /* 改行して表示 */
-  font-size: 1.1em; /* 少し大きめで目立たせる */
-  color: #222; /* 文字を濃くして見やすく */
-  margin-top: 0.2em; /* 上に余白を少し */
-}
-
-/* ===== 結果カード上部を固定高さで統一 ===== */
-
-/* ===== 結果概要ページの固定レイアウト (改良版) ===== */
-
-/* ギャラリー全体 */
-.results-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5em;
   margin-top: 1.5em;
   padding: 0 1em;
+}
+
+/* 特別配置：1〜3位を上段中央寄せ、4〜5位を下段 */
+.results-gallery .result-card:nth-child(-n+3) {
+  grid-row: 1;
+}
+.results-gallery .result-card:nth-child(n+4) {
+  grid-row: 2;
 }
 
 /* 各カード */
 .result-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
-  width: 320px;
-  min-height: 560px; /* 全体高さ固定 */
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-align: center;
+  transition: transform 0.3s ease;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-/* 順位ヘッダー */
+/* ヘッダー部分（順位＋票率） */
 .result-header {
   padding: 0.6em 0.4em;
-  height: 3.8em; /* 高さ固定 */
+  height: 3.8em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #ddd;
   flex-shrink: 0;
+  border-radius: 8px 8px 0 0;
 }
 
-/* 順位ごとのカラー */
+/* 順位別カラー */
 .result-card.rank-1 .result-header { background: #ffe066; }
 .result-card.rank-2 .result-header { background: #e0e0e0; }
 .result-card.rank-3 .result-header { background: #d7a46f; color: #fff; }
 .result-card.rank-4 .result-header { background: #99bbff; color: #fff; }
 .result-card.rank-5 .result-header { background: #bbb; color: #fff; }
 
-/* 順位・票率 */
 .result-header h3 {
   margin: 0;
   font-size: 1.1em;
@@ -654,18 +614,23 @@ footer .disclaimer {
   font-size: 0.9em;
 }
 
-/* 画像部分 */
+/* 画像部分 — アスペクト比維持 */
+.result-card a {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background-color: #f5f5f5;
+}
 .result-card img {
   width: 100%;
-  height: 280px; /* 画像高さを固定 */
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   display: block;
-  flex-shrink: 0;
+  background: #fff;
 }
 
-/* 作品情報ブロック */
+/* 情報部分 */
 .result-info {
-  flex-shrink: 0;
   padding: 0.6em 0.8em 1em;
   background: #fafafa;
   border-top: 1px solid #ddd;
@@ -673,11 +638,9 @@ footer .disclaimer {
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
-  height: 220px; /* ← ここで高さを固定 */
-  overflow: hidden; /* 超えた部分は非表示（ズレ防止）*/
+  min-height: 210px;
 }
 
-/* 各要素 */
 .work-number {
   font-weight: bold;
   margin-bottom: 0.3em;
@@ -703,6 +666,7 @@ footer .disclaimer {
   color: #555;
   margin-bottom: 0.15em;
 }
+
 
 /* 　特別な修飾　 */
 .notice {
