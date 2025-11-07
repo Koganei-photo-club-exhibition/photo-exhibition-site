@@ -548,27 +548,20 @@ footer .disclaimer {
   background: navy;
 }
 
-/* ===== 結果概要ページ (アスペクト比維持・2段構成版) ===== */
+/* ===== 結果概要ページ (幅統一・アスペクト比維持・スマホ対応) ===== */
 
-/* ギャラリー全体：上位3つと下位2つを段分け配置 */
 .results-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.8em;
   margin-top: 1.5em;
   padding: 0 1em;
 }
 
-/* 特別配置：1〜3位を上段中央寄せ、4〜5位を下段 */
-.results-gallery .result-card:nth-child(-n+3) {
-  grid-row: 1;
-}
-.results-gallery .result-card:nth-child(n+4) {
-  grid-row: 2;
-}
-
-/* 各カード */
+/* 各カードの幅を統一 */
 .result-card {
+  width: 360px; /* ← 統一幅（PC時） */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -579,11 +572,9 @@ footer .disclaimer {
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease;
-  max-width: 420px;
-  margin: 0 auto;
 }
 
-/* ヘッダー部分（順位＋票率） */
+/* ヘッダー部分 */
 .result-header {
   padding: 0.6em 0.4em;
   height: 3.8em;
@@ -592,40 +583,34 @@ footer .disclaimer {
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #ddd;
-  flex-shrink: 0;
   border-radius: 8px 8px 0 0;
+  flex-shrink: 0;
 }
 
-/* 順位別カラー */
+/* 順位カラー */
 .result-card.rank-1 .result-header { background: #ffe066; }
 .result-card.rank-2 .result-header { background: #e0e0e0; }
 .result-card.rank-3 .result-header { background: #d7a46f; color: #fff; }
 .result-card.rank-4 .result-header { background: #99bbff; color: #fff; }
 .result-card.rank-5 .result-header { background: #bbb; color: #fff; }
 
-.result-header h3 {
-  margin: 0;
-  font-size: 1.1em;
-  font-weight: bold;
-}
-.result-header .votes {
-  margin: 0.2em 0 0;
-  font-weight: bold;
-  font-size: 0.9em;
-}
+.result-header h3 { margin: 0; font-size: 1.1em; font-weight: bold; }
+.result-header .votes { margin: 0.2em 0 0; font-weight: bold; font-size: 0.9em; }
 
-/* 画像部分 — アスペクト比維持 */
+/* 画像部分 — Safari対策つきアスペクト比固定 */
 .result-card a {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  position: relative;
+  padding-top: 66.6%; /* 3:2比率 */
   background-color: #f5f5f5;
 }
 .result-card img {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
   background: #fff;
 }
 
@@ -641,32 +626,33 @@ footer .disclaimer {
   min-height: 210px;
 }
 
-.work-number {
-  font-weight: bold;
-  margin-bottom: 0.3em;
-  font-size: 1em;
-  color: #444;
-}
-.work-title {
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-bottom: 0.4em;
-  color: #222;
-}
-.work-author {
-  font-size: 0.9em;
-  margin-bottom: 0.3em;
-  color: #333;
-}
-.work-location,
-.work-camera,
-.work-lens,
-.work-settings {
-  font-size: 0.8em;
-  color: #555;
-  margin-bottom: 0.15em;
+/* 各テキスト */
+.work-number { font-weight: bold; margin-bottom: 0.3em; font-size: 1em; color: #444; }
+.work-title { font-weight: bold; font-size: 1.1em; margin-bottom: 0.4em; color: #222; }
+.work-author { font-size: 0.9em; margin-bottom: 0.3em; color: #333; }
+.work-location, .work-camera, .work-lens, .work-settings {
+  font-size: 0.8em; color: #555; margin-bottom: 0.15em;
 }
 
+/* 📱 スマホ対応：1列＆幅自動 */
+@media (max-width: 768px) {
+  .results-gallery {
+    justify-content: center;
+    gap: 1.2em;
+    padding: 0;
+  }
+  .result-card {
+    width: 90%; /* スマホでは画面幅に合わせて広めに */
+    max-width: 400px;
+  }
+  .result-header { height: auto; padding: 0.4em; }
+  .result-header h3 { font-size: 1em; }
+  .result-header .votes { font-size: 0.85em; }
+  .work-title { font-size: 1em; }
+  .work-camera, .work-lens, .work-location, .work-settings {
+    font-size: 0.75em;
+  }
+}
 
 /* 　特別な修飾　 */
 .notice {
