@@ -24,10 +24,14 @@ title: 2025年度 学祭写真展 「燐光」 - 結果概要
       </div>
 
       <!-- 画像 -->
-      <a href="{{ work.images.full | relative_url }}" target="_blank">
-        <img src="{{ work.images.thumb | relative_url }}"
-             alt="作品No.{{ work.no }} {{ work.title }} 作者: {{ work.author }}">
-      </a>
+      <div class="photo-wrapper">
+        <div class="photo"
+              style="background-image: url('{{ work.images.thumb | relative_url }}');"
+              data-full="{{ work.images.full | relative_url }}"
+              alt="作品No.{{ work.no }} {{ work.title }} 作者: {{ work.author }}">
+        </div>
+        <div class="photo-overlay"></div>
+      </div>
 
       <!-- 作品情報 -->
       <div class="result-info">
