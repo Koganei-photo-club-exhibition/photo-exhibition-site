@@ -16,6 +16,7 @@ const exhibitions = {
       endDate:   new Date("2025-09-27T23:59:59"),
       worksPasswordURL: "works.html",
       worksPublicURL: "af69592862e159a7cf723a78c20a47ce109d13b04db75224503159b765b84967/index.html",
+      worksPublicEndDate: new Date("2025-09-19T23:59:59"),
       resultURL: "result.html",
       voteFormURL: "https://forms.gle/YJQeJJkgrZZoCbBs5",
       navSelector: 'a[href*="2025/summer"]'
@@ -26,6 +27,7 @@ const exhibitions = {
       endDate:   new Date("2025-11-05T00:00:00"),
       worksPasswordURL: "works.html",
       worksPublicURL: "2af262a415562b8849d6ab105bd0f438e062dd5912de91680106214e07239450/index.html",
+      worksPublicEndDate: new Date("2025-11-09T23:59:59"),
       resultURL: "result.html",
       voteFormURL: "https://forms.gle/PknQLKGvvztcN8sU6",
       navSelector: 'a[href*="2025/gakusai"]'
@@ -150,6 +152,16 @@ if (exhibitions[exhibitionYear] && exhibitions[exhibitionYear][exhibitionKey]) {
       resultLink.textContent = "結果概要を見る";
       resultLink.classList.remove("disabled");
       resultLink.setAttribute("href", resultURL);
+    }
+
+    // == 作品一覧の一般公開終了制御 ==
+    if (worksPublicEndDate && now > worksPublicEndDate) {
+      // 一般公開が期限切れの場合
+      if (worksLink) {
+        worksLink.textContent = "作品一覧（公開終了）";
+        worksLink.classList.add("disabled");
+        worksLink.removeAttribute("href");
+      }
     }
   }
 }
