@@ -177,6 +177,27 @@ if (exhibitions[exhibitionYear] && exhibitions[exhibitionYear][exhibitionKey]) {
         resultLink.removeAttribute("href");
       }
     }
+
+    // == mdファイル内リンク制御 ==
+    const postWorksLinks = document.querySelectorAll(".works-link");
+
+    if (worksPublicEndDate && now > worksPublicEndDate) {
+      postWorksLinks.forEach(link => {
+        link.textContent = "作品一覧（公開終了）";
+        link.classList.add("disabled");
+        link.removeAttribute("href");
+      });
+    }
+
+    const postResultLinks = document.querySelectorAll(".result-link");
+
+    if (resultPublicEndDate && now > resultPublicEndDate) {
+      postResultLinks.forEach(link => {
+        link.textContent = "結果概要（公開終了）";
+        link.classList.add("disabled");
+        link.removeAttribute("href");
+      });
+    }
   }
 }
 
