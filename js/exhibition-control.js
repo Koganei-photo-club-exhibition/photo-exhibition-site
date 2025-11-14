@@ -75,6 +75,8 @@ if (exhibitions[exhibitionYear] && exhibitions[exhibitionYear][exhibitionKey]) {
   const {
     openDate, startDate, endDate,
     worksPasswordURL, worksPublicURL,
+    worksPublicEndDate,
+    resultPublicEndDate,
     voteFormURL, resultURL
   } = exhibitions[exhibitionYear][exhibitionKey];
 
