@@ -2,7 +2,7 @@
 title: "2025学祭写真展の作品一覧一般公開開始について"
 date: 2025-11-07
 exhibition: "gakusai"
-published: true
+published: false
 ---
 
 ## 2025学祭写真展「燐光」の作品一覧の一般公開を開始しました

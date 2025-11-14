@@ -2,7 +2,7 @@
 title: "2025夏写真展の作品一覧一般公開開始について"
 date: 2025-09-29
 exhibition: summer
-published: true
+published: false
 ---
 
 ## 2025夏写真展「閃光」の作品一覧の一般公開を開始しました

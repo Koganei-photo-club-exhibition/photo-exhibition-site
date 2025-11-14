@@ -2,7 +2,7 @@
 title: "2025学祭写真展の結果概要を公開しました"
 date: 2025-11-06
 exhibition: gakusai
-published: true
+published: false
 ---
 
 ## 2025年度学祭写真展「燐光」の投票結果を公開しました
